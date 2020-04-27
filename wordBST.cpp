@@ -56,6 +56,7 @@ int WordBST::deleteWord(string const& value) {
     if (n->pair.second > 1) {
         n->pair.second = n->pair.second - 1; 
         cout << value << " deleted, new count = " << n->pair.second << endl; 
+        return; 
     }
     else {
         if ( !n->left && !n->right ) {
@@ -68,12 +69,14 @@ int WordBST::deleteWord(string const& value) {
             n = NULL;
             delete n;
             cout << value << " deleted" << endl; 
+            return; 
         }
         else {
             n = NULL;
             delete n;
             root = NULL;
             cout << value << " deleted" << endl; 
+            return; 
 
         }
     }
@@ -90,6 +93,7 @@ int WordBST::deleteWord(string const& value) {
         n = NULL;
         delete n;
         cout << value << " deleted" << endl; 
+        return; 
 
     }
     else if ( !n->right ) {
@@ -105,6 +109,7 @@ int WordBST::deleteWord(string const& value) {
         n = NULL;
         delete n;
         cout << value << " deleted" << endl; 
+        return; 
     }
     else {
         Node* suc = new Node;
@@ -114,6 +119,7 @@ int WordBST::deleteWord(string const& value) {
             delete n;
             root = NULL;
             cout << value << " deleted" << endl; 
+            return; 
         }
         if ( suc->parent->pair.first == value )
             suc->right = n->right->right;
@@ -137,6 +143,7 @@ int WordBST::deleteWord(string const& value) {
         n = NULL;
         delete n;
         cout << value << " deleted" << endl; 
+        return; 
     }
     return true;
     }
