@@ -17,7 +17,9 @@ int main(int argc, char *argv[]) {
 
     ifstream textFile; 
     textFile.open("/autograder/submission/PA1_dataset.txt"); 
+    //textFile.open("PA1_dataset.txt"); 
     string word;
+    char wordChar[100];
     int count; 
 
     if (textFile.fail()) {
@@ -27,11 +29,12 @@ int main(int argc, char *argv[]) {
 
     while (!textFile.eof() && !textFile.fail() && count < 9999) {
         count++; 
-        textFile >> word;
-        wordList1.insertWord(word); 
+        textFile >> wordChar;
+        wordList1.insertWord(wordChar); 
         wordList2.insertWord(word);   
     }
-    textFile.close(); 
+    textFile.close();  
+    cout << "---------------------" << endl; 
 
     string argument = argv[1] ; 
     string::iterator it = argument.begin(); 
@@ -64,8 +67,7 @@ int main(int argc, char *argv[]) {
     }
     commands.push_back(subword); 
  
-    for (int vecIt = 0; vecIt < commands.size(); vecIt++) {
-        cout << commands[vecIt] << " "; 
+    for (int vecIt = 0; vecIt < commands.size(); vecIt++) {  
         if (commands[vecIt] == "range search") {
             wordList1.rangeSearch(commands[vecIt + 1], commands[vecIt + 2]); 
             wordList2.rangeSearch(wordList2.root, commands[vecIt + 1], commands[vecIt + 2] );

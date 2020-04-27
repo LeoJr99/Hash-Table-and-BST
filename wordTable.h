@@ -24,17 +24,16 @@ public:
     // Precondition: Given a valid string to search for 
     // Postcondition: If word is found it will output "[word] found, count = [count]"
     // If word not found it will out output "[word] not found" 
-    int searchWord(string const& word) const; 
+    int searchWord(string word) const; 
 
     // Insert Function: 
     // Given a string, it will insert into the hash table 
-    int insertWord(string const& word); 
+    int insertWord(string const word); 
 
     // Delete Function: 
-    //
-    int deleteWord(string const& word); 
+    int deleteWord(string word); 
 
-    void rangeSearch(string const& first, string const& last) const; 
+    void rangeSearch(string first, string last) const; 
 
 private:
     const static size_t SIZE = 13001; 
@@ -42,7 +41,7 @@ private:
 
     vector<std::pair<string, int>> table[SIZE]; 
 
-    size_t hash(std::string const& word) const; 
+    size_t hash(std::string word) const; 
     // Hash function, returns an index for the hash table 
     
 };

@@ -13,7 +13,7 @@ bool stringSort(const std::pair<string, int> &a,
 	return (a.first < b.first); 
 }
 
-int WordTable::searchWord(string const& word) const {
+int WordTable::searchWord(string word) const {
     
     int count = 0; 
     int index = hash(word); 
@@ -28,27 +28,28 @@ int WordTable::searchWord(string const& word) const {
     cout << word << " not found" << endl; 
 }
 
-int WordTable::insertWord(string const& word) {
+int WordTable::insertWord(string word) { 
     int count = 0;
     int index = hash(word); 
 
-    if (table[index].empty()) {
-        table[index].push_back(std::make_pair(word,1)); 
-        cout << table[index][0].first << " inserted, new count = " << 1 << endl;
-    }
-    else {
-        for (size_t i = 0; i < table[index].size(); i++) {
-            if (table[index][i].first == word) {
-                table[index][i].second = table[index][i].second + 1;
-                count = table[index][i].second;
-                cout << table[index][i].first << " inserted, new count = " << count << endl; 
-                return 0; 
-            }
+
+    for (size_t i = 0; i < table[index].size(); i++) {
+        if (table[index][i].first == word) {
+            table[index][i].second = table[index][i].second + 1;
+            count = table[index][i].second;
+            cout << word << " inserted, new count = " << count << endl;
+
+            return 0; 
+
         } 
     }
+
+    table[index].push_back(std::make_pair(word, 1)); 
+    cout << word << " inserted, new count = " << 1 << endl;
+
 }
 
-int WordTable::deleteWord(string const& word) {
+int WordTable::deleteWord(string word) {
 
     int count = 0;
     int index = hash(word); 
@@ -71,7 +72,7 @@ int WordTable::deleteWord(string const& word) {
     cout << word << " not found" << endl;
 }
 
-void WordTable::rangeSearch(string const& first, string const& last) const {
+void WordTable::rangeSearch(string first, string last) const {
 
     vector<std::pair<string, int>> wordVector; 
 
@@ -86,6 +87,16 @@ void WordTable::rangeSearch(string const& first, string const& last) const {
         }
     }
     std::sort(wordVector.begin(), wordVector.end(), stringSort); 
+
+    for (size_t j = 0; j < wordVector.size(); j++) {
+        if (wordVector[j].first.compare(first) >= 0 &&
+            wordVector[j].first.compare(last) <= 0) {
+                cout << wordVector[j].first << endl; 
+            }
+    }
+
+
+    /*
     vector<std::pair<string, int>>::iterator it = wordVector.begin(); 
     
     for (it; it != wordVector.end(); it++) {
@@ -103,10 +114,11 @@ void WordTable::rangeSearch(string const& first, string const& last) const {
     for (it; it != (it2 + 1); it++) {
         cout << it->first << endl; 
     }
+    */ 
 }
 
-size_t WordTable::hash(string const& word) const {
-    
+size_t WordTable::hash(string word) const {
+
     size_t p = 31; 
     // size_t m = 1e10 + 9; 
     size_t hashValue = 0; 
@@ -116,5 +128,6 @@ size_t WordTable::hash(string const& word) const {
         pPow = (pPow * p) % SIZE; 
     }
     return hashValue; 
+
 
 }
