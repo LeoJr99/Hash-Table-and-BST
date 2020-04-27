@@ -33,12 +33,104 @@ void WordBST::insertWord(string const& word) {
         root = new Node(); 
         root->pair.first = word; 
         root->pair.second = 1; 
+        cout << word << " inserted, new count = 1" << endl; 
+        return; 
     }
     return insert(word, root); 
 }
 
-int WordBST::deleteWord(string const& word) {
-    
+int WordBST::deleteWord(string const& value) {
+    Node* n = new Node;
+    n = getNodeFor( value, root );
+    if ( !n )
+        return false;
+    if (n->pair.second > 1) {
+        n->pair.second = n->pair.second - 1; 
+        cout << value << " deleted, new count = " << n->pair.second << endl; 
+    }
+    else {
+        if ( !n->left && !n->right ) {
+        if ( n->parent ) {
+            if ( n->pair.first < n->parent->pair.first )
+                n->parent->left = NULL;
+            else
+                n->parent->right = NULL;
+                
+            n = NULL;
+            delete n;
+            cout << value << " deleted" << endl; 
+        }
+        else {
+            n = NULL;
+            delete n;
+            root = NULL;
+            cout << value << " deleted" << endl; 
+
+        }
+    }
+    else if ( !n->left ) {
+        if ( n == root )
+            root = n->right;
+        else if ( n->pair.first > n->parent->pair.first ) {
+            n->parent->right = n->right;
+        }
+        else {
+            n->parent->left = n->right;
+        }
+        n->right->parent = n->parent;
+        n = NULL;
+        delete n;
+        cout << value << " deleted" << endl; 
+
+    }
+    else if ( !n->right ) {
+        if ( n == root )
+            root = n->left;
+        else if ( n->pair.first > n->parent->pair.first ) {
+            n->parent->right = n->left;
+        }
+        else {
+            n->parent->left = n->left;
+        }
+        n->left->parent = n->parent;
+        n = NULL;
+        delete n;
+        cout << value << " deleted" << endl; 
+    }
+    else {
+        Node* suc = new Node;
+        suc = getSuccessorNode( value );
+        if ( suc == NULL ) {
+            n = NULL;
+            delete n;
+            root = NULL;
+            cout << value << " deleted" << endl; 
+        }
+        if ( suc->parent->pair.first == value )
+            suc->right = n->right->right;
+        else {
+            Node* temp = suc->right;
+            if ( suc->right )
+                suc->right->parent = suc->parent;
+            suc->right = n->right;
+            suc->parent->left = temp;
+        }
+        suc->left = n->left;
+        suc->parent = n->parent;
+        if ( suc->parent && suc->pair.first < suc->parent->pair.first )
+            suc->parent->left = suc;
+        if ( suc->right )
+            suc->right->parent = suc;
+        if ( suc->left )
+            suc->left->parent = suc;
+        if ( !suc->parent )
+            root = suc;
+        n = NULL;
+        delete n;
+        cout << value << " deleted" << endl; 
+    }
+    return true;
+    }
 }
 
 void WordBST::rangeSearch(Node* n, string const& first, string const& last) const {
@@ -69,6 +161,8 @@ void WordBST::clear(Node *n) {
 void WordBST::insert(string const& word, Node *n) {
     if (word == n->pair.first) {
         n->pair.second = n->pair.second + 1; 
+        cout << word << " inserted, new count = " << n->pair.second << endl; 
+        return; 
     }
     if (word < n->pair.first) {
         if (n->left) {
@@ -79,6 +173,8 @@ void WordBST::insert(string const& word, Node *n) {
             n->left->pair.first = word; 
             n->left->pair.second = 1; 
             n->left->parent = n; 
+            cout << word << " inserted, new count = 1" << endl;
+            return; 
         }
     }
     else {
@@ -90,6 +186,8 @@ void WordBST::insert(string const& word, Node *n) {
             n->right->pair.first = word; 
             n->right->pair.second = 1; 
             n->right->parent = n; 
+            cout << word << " inserted, new count = 1" << endl;
+            return; 
         }
     }
 }

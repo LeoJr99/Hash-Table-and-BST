@@ -29,21 +29,23 @@ int WordTable::searchWord(string const& word) const {
 }
 
 int WordTable::insertWord(string const& word) {
-
     int count = 0;
     int index = hash(word); 
 
-    for (size_t i = 0; i < table[index].size(); i++) {
-        if (table[index][i].first == word) {
-            table[index][i].second = table[index][i].second + 1;
-            count = table[index][i].second;
-            cout << word << " inserted, new count = " << count << endl; 
-            return 0; 
-        }
+    if (table[index].empty()) {
+        table[index].push_back(std::make_pair(word,1)); 
+        cout << table[index][0].first << " inserted, new count = " << 1 << endl;
     }
-
-    table[index].push_back(std::make_pair(word,1)); 
-    cout << word << " inserted, new count = " << count << endl; 
+    else {
+        for (size_t i = 0; i < table[index].size(); i++) {
+            if (table[index][i].first == word) {
+                table[index][i].second = table[index][i].second + 1;
+                count = table[index][i].second;
+                cout << table[index][i].first << " inserted, new count = " << count << endl; 
+                return 0; 
+            }
+        } 
+    }
 }
 
 int WordTable::deleteWord(string const& word) {

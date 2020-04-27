@@ -8,7 +8,7 @@
 #include <string> 
 #include <utility>
 
-using std::cout, std::endl, std::string, std::vector;
+using namespace std; 
 
 class WordBST {
 public: 
@@ -18,6 +18,7 @@ public:
         std::pair<string, int> pair;  
         Node *left, *right, *parent;
     };
+    Node *root; 
 
     // Default Constructor 
     WordBST(); 
@@ -42,8 +43,6 @@ public:
     Node* getSuccessorNode(string const& word) const; 
     
 private:
-
-    Node *root; 
 
     // recursive functions 
     void clear(Node *n); // will be used for destructor 
