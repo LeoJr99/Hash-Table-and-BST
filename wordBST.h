@@ -31,6 +31,7 @@ public:
     // Insert Function: 
     // Given a string, it will insert into the hash table 
     void insertWord(string const& word); 
+    void insertWord2(string const& word); 
 
     // Delete Function: 
     //
@@ -47,6 +48,7 @@ private:
     // recursive functions 
     void clear(Node *n); // will be used for destructor 
     void insert(string const& word, Node *n); // helper function for insert
+    void insert2(string const& word, Node *n); // helper function for insert
 
 };
 

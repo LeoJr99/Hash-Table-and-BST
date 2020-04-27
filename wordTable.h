@@ -29,6 +29,7 @@ public:
     // Insert Function: 
     // Given a string, it will insert into the hash table 
     int insertWord(string const word); 
+    int insertWord2(string const word); 
 
     // Delete Function: 
     int deleteWord(string word); 

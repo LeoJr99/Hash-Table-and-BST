@@ -38,6 +38,15 @@ void WordBST::insertWord(string const& word) {
     }
     return insert(word, root); 
 }
+void WordBST::insertWord2(string const& word) {
+    if(!root) {
+        root = new Node(); 
+        root->pair.first = word; 
+        root->pair.second = 1; 
+        return; 
+    }
+    return insert2(word, root); 
+}
 
 int WordBST::deleteWord(string const& value) {
     Node* n = new Node;
@@ -187,6 +196,36 @@ void WordBST::insert(string const& word, Node *n) {
             n->right->pair.second = 1; 
             n->right->parent = n; 
             cout << word << " inserted, new count = 1" << endl;
+            return; 
+        }
+    }
+}
+void WordBST::insert2(string const& word, Node *n) {
+    if (word == n->pair.first) {
+        n->pair.second = n->pair.second + 1; 
+        return; 
+    }
+    if (word < n->pair.first) {
+        if (n->left) {
+            return insert2(word, n->left); 
+        }
+        else {
+            n->left = new Node(); 
+            n->left->pair.first = word; 
+            n->left->pair.second = 1; 
+            n->left->parent = n; 
+            return; 
+        }
+    }
+    else {
+        if (n->right) 
+            return insert2(word, n->right); 
+
+        else {
+            n->right = new Node(); 
+            n->right->pair.first = word; 
+            n->right->pair.second = 1; 
+            n->right->parent = n; 
             return; 
         }
     }

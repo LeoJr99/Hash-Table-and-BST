@@ -30,11 +30,10 @@ int main(int argc, char *argv[]) {
     while (!textFile.eof() && !textFile.fail() && count < 9999) {
         count++; 
         textFile >> wordChar;
-        wordList1.insertWord(wordChar); 
-        wordList2.insertWord(word);   
+        wordList1.insertWord2(wordChar); 
+        wordList2.insertWord2(wordChar);   
     }
     textFile.close();  
-    cout << "---------------------" << endl; 
 
     string argument = argv[1] ; 
     string::iterator it = argument.begin(); 
