@@ -15,7 +15,8 @@ public:
 
 
     struct Node {
-        std::pair<string, int> pair;  
+        string wordVal; 
+        int count; 
         Node *left, *right, *parent;
     };
     Node *root; 
@@ -35,7 +36,7 @@ public:
 
     // Delete Function: 
     //
-    int deleteWord(string const& word); 
+    void deleteWord(string &word); 
 
     void rangeSearch(Node* n, string const& first, string const& last) const;
 

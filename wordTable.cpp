@@ -114,26 +114,6 @@ void WordTable::rangeSearch(string first, string last) const {
             }
     }
 
-
-    /*
-    vector<std::pair<string, int>>::iterator it = wordVector.begin(); 
-    
-    for (it; it != wordVector.end(); it++) {
-        if (it->first == first) {
-            break;  
-        }
-    }
-    vector<std::pair<string, int>>::iterator it2 = it; 
-    for (it2; it2 != wordVector.end(); it2++) {
-        if (it2->first == last) {
-            break;  
-        }
-    }
-
-    for (it; it != (it2 + 1); it++) {
-        cout << it->first << endl; 
-    }
-    */ 
 }
 
 size_t WordTable::hash(string word) const {

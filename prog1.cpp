@@ -16,8 +16,8 @@ int main(int argc, char *argv[]) {
     WordBST wordList2; 
 
     ifstream textFile; 
-    textFile.open("/autograder/submission/PA1_dataset.txt"); 
-    //textFile.open("PA1_dataset.txt"); 
+    //textFile.open("/autograder/submission/PA1_dataset.txt"); 
+    textFile.open("PA1_dataset.txt"); 
     string word;
     char wordChar[100];
     int count; 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 
     while (!textFile.eof() && !textFile.fail() && count < 9999) {
         count++; 
-        textFile >> wordChar;
+        textFile >> wordChar; 
         wordList1.insertWord2(wordChar); 
         wordList2.insertWord2(wordChar);   
     }
