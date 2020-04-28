@@ -16,8 +16,8 @@ int main(int argc, char *argv[]) {
     WordBST wordList2; 
 
     ifstream textFile; 
-    //textFile.open("/autograder/submission/PA1_dataset.txt"); 
-    textFile.open("PA1_dataset.txt"); 
+    textFile.open("/autograder/submission/PA1_dataset.txt"); 
+    //textFile.open("PA1_dataset.txt"); 
     string word;
     char wordChar[100];
     int count; 
