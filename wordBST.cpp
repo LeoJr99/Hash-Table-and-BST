@@ -119,49 +119,26 @@ void WordBST::deleteWord(string & value) {
                 return; 
             }
         }
-        // case of 2 children 
+        // case of 2 children
+        
         else {
             Node* successor;
-            successor = getSuccessorNode( value );
-            if ( successor == nullptr ) {
-                if (n!= nullptr) {
-                    delete n;
-                    root = nullptr;
-                    cout << value << " deleted" << endl; 
-                    return; 
-                }
-            }
-            if ( successor->parent->wordVal == value )
-                successor->right = n->right->right;
-            else {
-                Node* temp = successor->right;
-                if ( successor->right )
-                    successor->right->parent = successor->parent;
-                successor->right = n->right;
-                successor->parent->left = temp;
-            }
-            successor->left = n->left;
-            successor->parent = n->parent;
+            Node* succParent; 
+            successor = getSuccessorNode(value);
+            succParent = successor->parent; 
 
-            if ( successor->parent && successor->wordVal < successor->parent->wordVal )
-                successor->parent->left = successor;
+            // 'delete' n  by replacing it with successor
+            // then delete the original successor node; 
 
-            if ( successor->right )
-                successor->right->parent = successor;
+            n->wordVal = successor->wordVal; 
+            n->count = successor ->count; 
+            succParent->left = successor->right;
 
-            if ( successor->left )
-                successor->left->parent = successor;
+            cout << value << " deleted" << endl; 
 
-            if ( !successor->parent )
-                root = successor;
+            delete successor; 
 
-            if (n!= nullptr) {
-                delete n;
-                cout << value << " deleted" << endl; 
-                return; 
-            }
         }
-    return;
     }
 } 
 
